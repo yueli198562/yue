@@ -3,11 +3,23 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select #引用Select 下拉框操作
 from s.rexcel import *
-import time,unittest
+import time,unittest,random,SendKeys,os
 
+base_dir=os.path.dirname(os.path.dirname(__file__)) #返回当前文件所在目录的上级目录
+photo_file=base_dir+'/photographa/p1.jpg' #找到图片的路径
+photo_file=excel_file.replace("/","\\") #将路径"/"替换为"\"
+
+#因为添加车辆时，车牌号不能重复，所以车牌号采用随机生成
+a1=random.choice(u'京济川藏鲁').encode('utf8')
+a2=random.choice('ABCDEFGHIGKLMNOPQRSTUVWXYZ')
+a3=str(random.randint(1,1000))
+a4=str(random.randint(1,1000))
+a5=str(random.randint(1,1000))
+
+car_number=a1+a2+a3+a4+a5
 
 class Case(unittest.TestCase):  #测试用例类
-    '''保费计算'''
+    u'''保费计算'''
     @classmethod
     def setUpClass(cls):
         cls.driver=webdriver.Firefox() #启动火狐浏览器
@@ -37,11 +49,15 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath(B10).send_keys("aaaaaaa")
         #上传营业执照
         driver.find_element_by_xpath(B11).click()
-        os.system(B12)
+        # SendKeys方法输入内容
+        SendKeys.SendKeys(photo_file)  # 发送文件地址
+        SendKeys.SendKeys("{ENTER}")  # 发送回车键
         #道路运输经营许可证输入框填写,和图片上传
         driver.find_element_by_xpath(B13).send_keys("aaaaaaa")
         driver.find_element_by_xpath(B14).click()
-        os.system(B12)
+        # SendKeys方法输入内容
+        SendKeys.SendKeys(photo_file)  # 发送文件地址
+        SendKeys.SendKeys("{ENTER}")  # 发送回车键
         #运输地域范围下拉框选择
         s=driver.find_element_by_xpath(B15)
         Select(s).select_by_value(sheet1_B4)
@@ -58,18 +74,20 @@ class Case(unittest.TestCase):  #测试用例类
         time.sleep(2)
         #点击填加车辆
         driver.find_element_by_xpath("html/body/div[1]/div/div[2]/div/button").click()
-        #点击新增                                                      
+        #点击新增
         time.sleep(2)
         driver.find_element_by_xpath("//*[@id='newAddbut']").click()
         #输入框添加车辆信息
-        time.sleep(3)
-        driver.find_element_by_xpath("//*[@id='carId']").send_keys(u"京j33344")
+        driver.implicitly_wait(10)
+        driver.find_element_by_xpath("//*[@id='carId']").send_keys(car_number.decode('utf8'))
         driver.find_element_by_xpath("//*[@id='carType']").send_keys("ya")
         driver.find_element_by_xpath("//*[@id='engine']").send_keys("123456")
         driver.find_element_by_xpath("//*[@id='carNum']").send_keys("11123111")
         driver.find_element_by_xpath("//*[@id='seatNum']").send_keys("10")
         driver.find_element_by_xpath("//*[@id='myfilesF']").click()
-        os.system(B12)
+        # SendKeys方法输入内容
+        SendKeys.SendKeys(photo_file)  # 发送文件地址
+        SendKeys.SendKeys("{ENTER}")  # 发送回车键
         time.sleep(2)
         driver.maximize_window()
         driver.find_element_by_xpath("//*[@id='formCar']/div/div/div[3]/button").click()
@@ -85,16 +103,16 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath('//*[@class="modal-footer"]/button').click()
         time.sleep(2)
     def test1(self):
-        '''每人责任限额（40万元）'''
+        u'''每人责任限额（40万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("40万")
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
@@ -102,112 +120,112 @@ class Case(unittest.TestCase):  #测试用例类
         self.assertEqual(d, e)
 
     def test2(self):
-        '''每人责任限额（50万元）'''
+        u'''每人责任限额（50万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("50万")
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*125
         self.assertEqual(d, e)
-        
+
     def test3(self):
-        '''每人责任限额（60万元）'''
+        u'''每人责任限额（60万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("60万")
-        time.sleep(3)
+        driver.implicitly_wait(5)
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*142
         self.assertEqual(d, e)
-        
+
     def test4(self):
-        '''每人责任限额（70万元）'''
+        u'''每人责任限额（70万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("70万")
-        time.sleep(3)
+        driver.implicitly_wait(5)
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*162
         self.assertEqual(d, e)
-        
+
     def test5(self):
-        '''每人责任限额（80万元）'''
+        u'''每人责任限额（80万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("80万")
-        time.sleep(3)
+        driver.implicitly_wait(3)
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*174
         self.assertEqual(d, e)
-        
+
     def test6(self):
-        '''每人责任限额（90万元）'''
+        u'''每人责任限额（90万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("90万")
-        time.sleep(3)
+        driver.implicitly_wait(3)
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*184
         self.assertEqual(d, e)
-        
+
     def test7(self):
-        '''每人责任限额（100万元）'''
+        u'''每人责任限额（100万元）'''
         driver=self.driver
         #选择方案
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        time.sleep(2)
+        driver.implicitly_wait(2)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("100万")
-        time.sleep(3)
+        driver.implicitly_wait(3)
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        time.sleep(2)
-         
+        driver.implicitly_wait(2)
+
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*202
         self.assertEqual(d, e)
-    
+
 if __name__=="__main__":
     unittest.main()  #运行所有测试用例
 
