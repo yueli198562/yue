@@ -56,6 +56,7 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath(B13).send_keys("aaaaaaa")
         driver.find_element_by_xpath(B14).click()
         # SendKeys方法输入内容
+        time.sleep(2)
         SendKeys.SendKeys(photo_file)  # 发送文件地址
         SendKeys.SendKeys("{ENTER}")  # 发送回车键
         #运输地域范围下拉框选择
@@ -78,7 +79,7 @@ class Case(unittest.TestCase):  #测试用例类
         time.sleep(2)
         driver.find_element_by_xpath("//*[@id='newAddbut']").click()
         #输入框添加车辆信息
-        driver.implicitly_wait(10)
+        driver.implicitly_wait(20)
         driver.find_element_by_xpath("//*[@id='carId']").send_keys(car_number.decode('utf8'))
         driver.find_element_by_xpath("//*[@id='carType']").send_keys("ya")
         driver.find_element_by_xpath("//*[@id='engine']").send_keys("123456")
@@ -86,13 +87,13 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath("//*[@id='seatNum']").send_keys("10")
         driver.find_element_by_xpath("//*[@id='myfilesF']").click()
         # SendKeys方法输入内容
+        time.sleep(2)
         SendKeys.SendKeys(photo_file)  # 发送文件地址
         SendKeys.SendKeys("{ENTER}")  # 发送回车键
-        time.sleep(2)
         driver.maximize_window()
         driver.find_element_by_xpath("//*[@id='formCar']/div/div/div[3]/button").click()
         #点击保存并下一步
-        driver.implicitly_wait(10)
+        time.sleep(2)
         driver.find_element_by_xpath("//*[@id='submit']").click()
         #勾选车辆
         driver.implicitly_wait(10)
@@ -101,47 +102,43 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath('//*[@data-target="#myModa1One"]').click()
         driver.implicitly_wait(10)
         driver.find_element_by_xpath('//*[@class="modal-footer"]/button').click()
-        driver.implicitly_wait(10)
+        time.sleep(2)
     def test1(self):
         u'''每人责任限额（40万元）'''
         driver=self.driver
         #选择方案
         driver.implicitly_wait(10)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        driver.implicitly_wait(10)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("40万")
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        driver.implicitly_wait(10)
-
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*112
         self.assertEqual(d, e)
+        time.sleep(2)
 
     def test2(self):
         u'''每人责任限额（50万元）'''
         driver=self.driver
         #选择方案
-        driver.implicitly_wait(5)
+        time.sleep(2)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
-        driver.implicitly_wait(5)
         s1=driver.find_element_by_xpath("//select")
         Select(s1).select_by_visible_text("50万")
         driver.find_element_by_xpath("//*[@id='myModa1Two']/div/div/div[3]/button").click()
-        driver.implicitly_wait(5)
-
         a=int(driver.find_element_by_xpath("//*[@id='tb']/tr/td[4]").text) #载人人数
         c=int(driver.find_element_by_xpath("//*[@id='totalCarNum']").get_attribute("value")) #车辆合计
         d=int(driver.find_element_by_xpath("//*[@id='totalMoney']").get_attribute("value")) #保费合计
         e=a*c*125
         self.assertEqual(d, e)
-
+        time.sleep(2)
     def test3(self):
         u'''每人责任限额（60万元）'''
         driver=self.driver
         #选择方案
+        time.sleep(2)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
         driver.implicitly_wait(5)
         s1=driver.find_element_by_xpath("//select")
@@ -160,6 +157,7 @@ class Case(unittest.TestCase):  #测试用例类
         u'''每人责任限额（70万元）'''
         driver=self.driver
         #选择方案
+        time.sleep(2)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
         driver.implicitly_wait(5)
         s1=driver.find_element_by_xpath("//select")
@@ -178,6 +176,7 @@ class Case(unittest.TestCase):  #测试用例类
         u'''每人责任限额（80万元）'''
         driver=self.driver
         #选择方案
+        time.sleep(2)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
         driver.implicitly_wait(5)
         s1=driver.find_element_by_xpath("//select")
@@ -196,6 +195,7 @@ class Case(unittest.TestCase):  #测试用例类
         u'''每人责任限额（90万元）'''
         driver=self.driver
         #选择方案
+        time.sleep(2)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
         driver.implicitly_wait(5)
         s1=driver.find_element_by_xpath("//select")
@@ -214,6 +214,7 @@ class Case(unittest.TestCase):  #测试用例类
         u'''每人责任限额（100万元）'''
         driver=self.driver
         #选择方案
+        time.sleep(2)
         driver.find_element_by_xpath('//*[@data-target="#myModa1Two"]').click()
         driver.implicitly_wait(5)
         s1=driver.find_element_by_xpath("//select")
