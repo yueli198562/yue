@@ -6,11 +6,12 @@ from s.rexcel import *
 import time,unittest,random,SendKeys,os
 
 base_dir=os.path.dirname(os.path.dirname(__file__)) #返回当前文件所在目录的上级目录
-photo_file=base_dir+'/photographa/p1.jpg' #找到图片的路径
-photo_file=excel_file.replace("/","\\") #将路径"/"替换为"\"
+base_dir=base_dir.replace("/","\\") #将路径"/"替换为"\"
+exe_file=base_dir+'\\photographa\\a.exe' #找到exe文件路径
+photo_file=base_dir+'\\photographa\\p1.jpg'  #找到图片路径
 
 #因为添加车辆时，车牌号不能重复，所以车牌号采用随机生成
-a1=random.choice(u'京济川藏鲁').encode('utf8')
+a1=random.choice(u'京济川藏鲁四五六平测试开始').encode('utf8')
 a2=random.choice('ABCDEFGHIGKLMNOPQRSTUVWXYZ')
 a3=str(random.randint(1,1000))
 a4=str(random.randint(1,1000))
@@ -49,16 +50,14 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath(B10).send_keys("aaaaaaa")
         #上传营业执照
         driver.find_element_by_xpath(B11).click()
-        # SendKeys方法输入内容
-        SendKeys.SendKeys(photo_file)  # 发送文件地址
-        SendKeys.SendKeys("{ENTER}")  # 发送回车键
+        # 调用 .exe 上传程序
+        os.system(exe_file+" "+photo_file)
         #道路运输经营许可证输入框填写,和图片上传
         driver.find_element_by_xpath(B13).send_keys("aaaaaaa")
         driver.find_element_by_xpath(B14).click()
         # SendKeys方法输入内容
         time.sleep(2)
-        SendKeys.SendKeys(photo_file)  # 发送文件地址
-        SendKeys.SendKeys("{ENTER}")  # 发送回车键
+        os.system(exe_file + " " + photo_file)
         #运输地域范围下拉框选择
         s=driver.find_element_by_xpath(B15)
         Select(s).select_by_value(sheet1_B4)
@@ -88,8 +87,7 @@ class Case(unittest.TestCase):  #测试用例类
         driver.find_element_by_xpath("//*[@id='myfilesF']").click()
         # SendKeys方法输入内容
         time.sleep(2)
-        SendKeys.SendKeys(photo_file)  # 发送文件地址
-        SendKeys.SendKeys("{ENTER}")  # 发送回车键
+        os.system(exe_file + " " + photo_file)
         driver.maximize_window()
         driver.find_element_by_xpath("//*[@id='formCar']/div/div/div[3]/button").click()
         #点击保存并下一步
