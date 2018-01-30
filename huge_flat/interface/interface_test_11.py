@@ -255,5 +255,29 @@ class Interface_test11(unittest.TestCase):
         self.assertEqual(result['code'], 2002)
         self.assertEqual(result['msg'], u"文件上传失败！：文件名称格式不合法！")
 
+    def test_14(self):
+        u''' 添加多个文件 '''
+        data = {"InsuranceLiabilityId": "ZR123456", "insuranceLiabilityName": "ZR责任名称6", "insuranceLiabilityType": 1,
+                "insuranceLiabilityDesc": "ZR责任描述6", "riskId": "XZ12345", "riskName": "XZ险种名称",
+                "limitVoList[0].liabilityLimitName": 'y新增限额名称1',
+                "limitVoList[0].llvVOList[0].liabilityLimitValues": "4万元",
+                "limitVoList[0].llvVOList[0].liabilityLimitValuesType": "1",
+                "limitVoList[0].liabilityLimitDesc": "y新增责任限额描述"}
+        f = [
+            ("multipartFile", open(updateFilesb, "rb")),
+            ("multipartFile", open(updateFiles, "rb")),
+        ]
+        r = requests.post(self.base_url, data=data, files=f)
+        result = r.json()
+        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['msg'], u"成功")
+        # -----删除测试数据-------
+        liability = 'delete from t_insurance_liability where insurance_liability_id="ZR123456"'
+        liability_limit = 'delete from t_liability_limit where insurance_liability_id="ZR123456"'
+        limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
+        insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
+        for i in [liability, liability_limit, limit_values, insurance_clause]:
+            sql(config_file_path, i, database_name)
+
 if __name__ == '__main__':
     unittest.main()

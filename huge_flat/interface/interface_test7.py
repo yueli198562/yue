@@ -36,9 +36,11 @@ class Interface_test7(unittest.TestCase):
         result = r.json()
         self.assertEqual(result['code'], 1002)
         self.assertEqual(result['msg'], u"成功")
-        # 删除插入数据
+        #删除插入数据
         risk = 'delete from t_risk_info where risk_id="XZ123456";'
-        sql(config_file_path, risk, database_name)
+        insurance_clause = 'delete from t_insurance_clause where their_id="XZ123456"'
+        for i in [risk,insurance_clause]:
+            sql(config_file_path, i, database_name)
 
     def test3(self):
         u''' 险种编码riskId为空 '''
@@ -119,6 +121,24 @@ class Interface_test7(unittest.TestCase):
         result = r.json()
         self.assertEqual(result['code'], 2001)
         self.assertEqual(result['msg'], u"上传文件为空！")
+
+    def test_12(self):
+        u''' 上传多个文件 '''
+        data = {"riskId": "XZ123456", "riskName": "XZ险种名称", "riskDesc": "XZ描述",
+                "insuranceClassesId": "XL12345", "riskFlag": "M", "riskGroupFlag": "G", "riskShortFlag": "L"}
+        f = [
+            ("updateFiles", open(updateFilesb, "rb")),
+            ("updateFiles", open(updateFiles, "rb")),
+        ]
+        r = requests.post(self.base_url, data=data, files=f)
+        result = r.json()
+        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['msg'], u"成功")
+        # 删除插入数据
+        risk = 'delete from t_risk_info where risk_id="XZ123456";'
+        insurance_clause = 'delete from t_insurance_clause where their_id="XZ123456"'
+        for i in [risk, insurance_clause]:
+            sql(config_file_path, i, database_name)
 
 if __name__ == '__main__':
     unittest.main()

@@ -230,22 +230,22 @@ class Interface_test12(unittest.TestCase):
         self.assertEqual(result['code'], 1002)
         self.assertEqual(result['msg'], u"成功")
 
-    # def test14(self):
-    #     u''' 修改时增加上传文件 '''
-    #     data = {"InsuranceLiabilityId": "ZR12345", "insuranceLiabilityName": "ZR责任名称6", "insuranceLiabilityType": 1,
-    #             "insuranceLiabilityDesc": "ZR责任描述6", "riskId": "XZ12345", "riskName": "XZ险种名称",
-    #             "limitVoList[0].liabilityLimitName": 'y新增限额名称1',
-    #             "limitVoList[0].llvVOList[0].liabilityLimitValues": "4万元",
-    #             "limitVoList[0].llvVOList[0].liabilityLimitValuesType": "1",
-    #             "limitVoList[0].liabilityLimitDesc": "y新增责任限额描述"}
-    #     f1 = {"multipartFile": open(updateFilesb, 'r')}
-    #     f2 = {"multipartFile": open(updateFiles, 'r')}
-    #     r = requests.put(self.base_url, data=data, files=[f1,f2])
-    #     result = r.json()
-    #     for i in result:
-    #         print i, result[i]
-    #     self.assertEqual(result['code'], 1002)
-    #     self.assertEqual(result['msg'], u"成功")
+    def test14(self):
+        u''' 修改时增加上传文件 '''
+        data = {"InsuranceLiabilityId": "ZR12345", "insuranceLiabilityName": "ZR责任名称6", "insuranceLiabilityType": 1,
+                "insuranceLiabilityDesc": "ZR责任描述6", "riskId": "XZ12345", "riskName": "XZ险种名称",
+                "limitVoList[0].liabilityLimitName": 'y新增限额名称1',
+                "limitVoList[0].llvVOList[0].liabilityLimitValues": "4万元",
+                "limitVoList[0].llvVOList[0].liabilityLimitValuesType": "1",
+                "limitVoList[0].liabilityLimitDesc": "y新增责任限额描述"}
+        f = [
+            ("multipartFile", open(updateFilesb, "rb")),
+            ("multipartFile", open(updateFiles, "rb")),
+        ]
+        r = requests.put(self.base_url, data=data, files=f)
+        result = r.json()
+        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['msg'], u"成功")
 
 if __name__ == '__main__':
     unittest.main()
