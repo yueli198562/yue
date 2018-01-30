@@ -3,7 +3,7 @@ import requests,unittest
 from db_fixture.mysql_db import *
 from db_fixture.test_data import *
 
-class Interface_test11(unittest.TestCase):
+class Interface_test12(unittest.TestCase):
     u''' 修改责任 '''
 
     @classmethod
