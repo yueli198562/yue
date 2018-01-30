@@ -104,8 +104,7 @@ class Interface_test7(unittest.TestCase):
         u''' 上传文件updateFiles文件名不合法 '''
         data = {"riskId": "XZ123456", "riskName": "XZ险种名称", "riskDesc": "XZ描述",
                 "insuranceClassesId": "XL12345", "riskFlag": "M","riskGroupFlag": "G", "riskShortFlag": "L"}
-        # f = {"updateFiles":""}
-        f = {"": ""}
+        f = {"updateFiles":""}
         r = requests.post(self.base_url, data=data,files=f)
         result = r.json()
         self.assertEqual(result['code'], 2002)
