@@ -11,8 +11,10 @@ nowtime=time.strftime("%y-%m-%d %H:%M:%S")
 nowtime="20"+nowtime
 
 #险类插入和删除数据
-classes1='INSERT into t_insurance_classes VALUES("XL12345","XL险类名称","XL描述","Y",1,'+ '"'+nowtime+'"'+','+ '"'+nowtime+'"'+','+'"XL创建人",0)'
+classes1='INSERT into t_insurance_classes VALUES("XL12345","XL险类名称","XL描述","N",1,'+ '"'+nowtime+'"'+','+ '"'+nowtime+'"'+','+'"XL创建人",0)'
+classes_1='INSERT into t_insurance_classes VALUES("XL123456","XL险类名称l","XL描述","Y",1,'+ '"'+nowtime+'"'+','+ '"'+nowtime+'"'+','+'"XL创建人",0)'
 classes2='delete from t_insurance_classes where insurance_classes_id="XL12345"'
+classes_2='delete from t_insurance_classes where insurance_classes_id="XL123456"'
 #险种插入和删除数据
 risk1='INSERT into t_risk_info VALUES("XZ12345","XZ险种名称","XZ描述","XL12345","M","G","L",'+ '"' + nowtime + '",'+'"XZ险种创建人",'+'"' + nowtime + '")'
 risk2='delete from t_risk_info where risk_id="XZ12345";'
@@ -32,6 +34,9 @@ insurance_clause1='INSERT into t_insurance_clause(insurance_clause_name,insuranc
 VALUES("c.txt","clause_url",2,"ZR12345",1,'+'"' + nowtime + '")'
 insurance_clause2='delete from t_insurance_clause where their_id="ZR12345"'
 
-for i in [liability2, liability_limit2, limit_values2, insurance_clause2]:
+liability = 'delete from t_insurance_liability where insurance_liability_id="ZR123456"'
+liability_limit = 'delete from t_liability_limit where insurance_liability_id="ZR123456"'
+limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
+insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
+for i in [liability, liability_limit, limit_values, insurance_clause]:
     sql(config_file_path, i, database_name)
-sql(config_file_path, risk2, database_name)

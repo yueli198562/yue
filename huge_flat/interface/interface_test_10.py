@@ -24,7 +24,7 @@ class Interface_test10(unittest.TestCase):
         base_url=self.base_url+"/ZR12345"
         r = requests.get(base_url)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test2(self):
@@ -32,7 +32,7 @@ class Interface_test10(unittest.TestCase):
         base_url = self.base_url + "/erterter"
         r = requests.get(base_url)
         result = r.json()
-        self.assertEqual(result['code'], 1006)
+        self.assertEqual(result['code'], 6)
         self.assertEqual(result['msg'], u"没有满足条件的数据")
 
 
@@ -40,7 +40,7 @@ class Interface_test10(unittest.TestCase):
         u''' 责任id为空 默认险类展示列表第1页 '''
         r = requests.get(self.base_url)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
 if __name__ == '__main__':

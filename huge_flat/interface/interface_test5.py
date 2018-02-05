@@ -21,7 +21,7 @@ class Interface_test5(unittest.TestCase):
         u''' 所有参数为空 '''
         r = requests.get(self.base_url)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test2(self):
@@ -37,7 +37,7 @@ class Interface_test5(unittest.TestCase):
         params = {'name': "XZ险种名称"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test4(self):
@@ -45,7 +45,7 @@ class Interface_test5(unittest.TestCase):
         params = {'name': "XZ险"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test5(self):
@@ -53,7 +53,7 @@ class Interface_test5(unittest.TestCase):
         params = {'name': "y12345"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1006)
+        self.assertEqual(result['code'], 6)
         self.assertEqual(result['msg'], u"没有满足条件的数据")
 
     def test6(self):
@@ -61,7 +61,7 @@ class Interface_test5(unittest.TestCase):
         params = {'creatBy': "XZ险种创建人"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test7(self):
@@ -69,7 +69,7 @@ class Interface_test5(unittest.TestCase):
         params = {'creatBy': "月亮月亮b"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1006)
+        self.assertEqual(result['code'], 6)
         self.assertEqual(result['msg'], u"没有满足条件的数据")
 
     def test8(self):
@@ -77,7 +77,7 @@ class Interface_test5(unittest.TestCase):
         params = {'page': 1,"name":"XZ险种名称"}
         r = requests.get(self.base_url,params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test9(self):
@@ -85,7 +85,7 @@ class Interface_test5(unittest.TestCase):
         params = {'page': 1, 'creatBy': "XZ险种创建人"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test_10(self):
@@ -93,7 +93,7 @@ class Interface_test5(unittest.TestCase):
         params = {"name":"XZ险种名称", 'creatBy': "XZ险种创建人"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
 if __name__ == '__main__':

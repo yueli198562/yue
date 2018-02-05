@@ -10,7 +10,7 @@ discover=unittest.defaultTestLoader.discover("./interface",pattern="interface_te
 if __name__=="__main__":
     f = open(html, 'wb')
     # 定义测试报告，stream：报告存放路径，title：报告标题，description：描述
-    runner = HTMLTestRunner.HTMLTestRunner(stream= f, title=u'大平台接口测试报告', description=u'大平台接口测试报告')
+    runner = HTMLTestRunner.HTMLTestRunner(stream= f, title=u'大平台接口测试报告', description=u'大平台接口测试报告(险类、险种、责任)')
     runner.run(discover)  # 运行测试用例
     f.close()
 

@@ -20,7 +20,7 @@ class Interface_test9(unittest.TestCase):
         u''' 所有参数为空 '''
         r = requests.get(self.base_url)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test2(self):
@@ -36,7 +36,7 @@ class Interface_test9(unittest.TestCase):
         params = {'page': 1}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test4(self):
@@ -44,7 +44,7 @@ class Interface_test9(unittest.TestCase):
         params = {'page': 10}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test5(self):
@@ -52,7 +52,7 @@ class Interface_test9(unittest.TestCase):
         params = {'page': 0}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test6(self):
@@ -60,7 +60,7 @@ class Interface_test9(unittest.TestCase):
         params = {'name': "ZR责任名称"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test7(self):
@@ -68,7 +68,7 @@ class Interface_test9(unittest.TestCase):
         params = {'name': "ZR责"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test8(self):
@@ -76,7 +76,7 @@ class Interface_test9(unittest.TestCase):
         params = {'name': "y12345"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1006)
+        self.assertEqual(result['code'], 6)
         self.assertEqual(result['msg'], u"没有满足条件的数据")
 
     def test9(self):
@@ -84,7 +84,7 @@ class Interface_test9(unittest.TestCase):
         params = {'creatBy': "ZR创建人"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test_10(self):
@@ -92,7 +92,7 @@ class Interface_test9(unittest.TestCase):
         params = {'creatBy': "月亮月亮b"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1006)
+        self.assertEqual(result['code'], 6)
         self.assertEqual(result['msg'], u"没有满足条件的数据")
 
     def test_11(self):
@@ -100,7 +100,7 @@ class Interface_test9(unittest.TestCase):
         params = {'page': 1,"name":"ZR责任名称"}
         r = requests.get(self.base_url,params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test_12(self):
@@ -108,7 +108,7 @@ class Interface_test9(unittest.TestCase):
         params = {'page': 1, 'creatBy': "ZR创建人"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
     def test_13(self):
@@ -116,7 +116,7 @@ class Interface_test9(unittest.TestCase):
         params = {"name":"ZR责任名称", 'creatBy': "ZR创建人"}
         r = requests.get(self.base_url, params)
         result = r.json()
-        self.assertEqual(result['code'], 1002)
+        self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
 
 if __name__ == '__main__':
