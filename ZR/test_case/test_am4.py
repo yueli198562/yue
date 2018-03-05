@@ -11,7 +11,7 @@ class test_am4(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/caseDeal/vCore1/claimConfirmSync"
+        cls.base_url = "http://"+url+"/caseDeal/vCore1/claimConfirmSync"
         sql(config_file_path, case_form1, database_name)  # 案件信息表插入数据
         sql(config_file_path, CONFIRM2, database_name)  # 确认信息表插入数据
         sql(config_file_path, MASTER, database_name)  # 结案主表插入数据

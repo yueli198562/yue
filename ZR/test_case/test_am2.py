@@ -8,7 +8,7 @@ class test_am2(unittest.TestCase):
     u'''支付状态同步接口'''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/caseDeal/vCore1/payStateSync"
+        cls.base_url = "http://"+url+"/caseDeal/vCore1/payStateSync"
         sql(config_file_path, case_form, database_name)  # 案件信息表插入数据
         sql(config_file_path, MASTER, database_name)  # 结案主表插入数据
         sql(config_file_path, CASE_CLOSE_FORM2, database_name)  # 结案从表插入数据
@@ -237,7 +237,7 @@ class test_am2(unittest.TestCase):
         r = requests.post(self.base_url, data)
         result = r.json()
         self.assertEqual(result['code'], u"40103")
-        self.assertEqual(result['message'], u"报案号62222519案件日期格式有误;")
+        self.assertEqual(result['message'], u"报案号62222519案件日期超出系统时间;")
 
     def test_14(self):
         u'''支付状态为10，支付方式为空'''

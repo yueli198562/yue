@@ -3,7 +3,9 @@ import sys, os
 import ConfigParser
 import MySQLdb,time
 
-def read_db_conf(config_file_path):  #定义一个函数，传入配置文件地址
+
+#定义一个函数，传入配置文件地址,字典形式返回配置文件内容
+def read_db_conf(config_file_path):
     cf = ConfigParser.ConfigParser()
     cf.read(config_file_path)
     db_conf = {}  #创建空的字典，用于存放配置文件内容
@@ -14,8 +16,9 @@ def read_db_conf(config_file_path):  #定义一个函数，传入配置文件地
     db_conf['port'] = cf.get("db_conf", "port")
     return db_conf
 
-def get_db_conn(config_file_path): #定义一个函数，传入配置文件地址
-    db_conf = read_db_conf(config_file_path) #调用read_db_conf函数，返回字典
+#定义一个函数，传入配置文件地址，返回数据库连接和创建游标
+def get_db_conn(config_file_path):
+    db_conf = read_db_conf(config_file_path) #调用read_db_conf函数，返回字典配置文件内容
     #创建数据库连接
     conn = MySQLdb.connect(
         host=db_conf['host'],
@@ -36,13 +39,13 @@ def insert_one(cur,conn,database_name, sql):
     conn.select_db(database_name) #选择数据库
     cur.execute(sql) #执行sql语句
 
-#插入删除数据封装
-def sql(config_file_path,sql,database_name):
-    conn, cur = get_db_conn(config_file_path)
+#插入删除查询数据库封装
+def sql(config_file_path,sql,database_name): #定义函数 传入配置文件地址，数据库名
+    conn, cur = get_db_conn(config_file_path) #调用get_db_conn函数 获取数据连接和数据库游标
     insert_one(cur, conn,database_name,sql)
     close_db(conn, cur)
 
-#获取一样数据
+#查询数据封装
 def select_all(config_file_path, sql, sql_name):
     conn, cur = get_db_conn(config_file_path)
     conn.select_db(sql_name)

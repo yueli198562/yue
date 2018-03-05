@@ -8,7 +8,7 @@ class test_am3(unittest.TestCase):
     u'''报案号同步接口'''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/caseDeal/vCore1/reportNoSync"
+        cls.base_url = "http://"+url+"/caseDeal/vCore1/reportNoSync"
         sql(config_file_path, case_form, database_name) #普通案件信息表里插入数据
 
     @classmethod

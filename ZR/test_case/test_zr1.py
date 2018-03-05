@@ -8,7 +8,7 @@ class test_zr1(unittest.TestCase):
     u'''普通案件报案接口 '''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/jtCase/vCore1/commonReport"
+        cls.base_url = "http://"+url+"/jtCase/vCore1/commonReport"
         sql(config_file_path, case_form, database_name)
 
     @classmethod
@@ -72,7 +72,7 @@ class test_zr1(unittest.TestCase):
     # def test3(self):
     #     u'''房源所在省编号不存在'''
     #     data = """{
-    #         "serialNumber":"110112113114115116118",
+    #         "serialNumber":"1110112113116115116118",
     #         "houseNo":"123459",
     #         "provinceCode":"898978",
     #         "cityCode":"150100",
@@ -104,8 +104,8 @@ class test_zr1(unittest.TestCase):
     # def test4(self):
     #     u'''房源所在市编号不存在'''
     #     data = """{
-    #     "serialNumber":"110112113114115116117",
-    #     "houseNo":"YZ-101",
+    #     "serialNumber":"1110112113116115116117",
+    #     "houseNo":"YZ-102",
     #     "provinceCode":"150000",
     #     "cityCode":"9889898",
     #     "districtCode":"150105",
@@ -132,8 +132,8 @@ class test_zr1(unittest.TestCase):
     # def test5(self):
     #     u'''房源所在区编号不存在'''
     #     data = """{
-    #     "serialNumber":"110112113114115116117",
-    #     "houseNo":"YZ-101",
+    #     "serialNumber":"1110112113116115116117",
+    #     "houseNo":"YZ-102",
     #     "provinceCode":"150000",
     #     "cityCode":"150100",
     #     "districtCode":"978987",
@@ -160,8 +160,8 @@ class test_zr1(unittest.TestCase):
     # def test6(self):
     #     u'''房源省编号市编号区编号不匹配'''
     #     data = """{
-    #         "serialNumber":"110112113114115116117",
-    #         "houseNo":"YZ-101",
+    #         "serialNumber":"1110112113116115116117",
+    #         "houseNo":"YZ-102",
     #         "provinceCode": "150000",
     #         "cityCode": "140200",
     #         "districtCode": "210283",
@@ -190,8 +190,8 @@ class test_zr1(unittest.TestCase):
     def test7(self):
         u''' 房源详细地址为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -221,8 +221,8 @@ class test_zr1(unittest.TestCase):
     def test8(self):
         u'''出险时间为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -248,8 +248,8 @@ class test_zr1(unittest.TestCase):
     def test9(self):
         u'''出险时间格式错误'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -276,8 +276,8 @@ class test_zr1(unittest.TestCase):
     def test_10(self):
         u'''出险时间晚于当前时间'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -304,8 +304,8 @@ class test_zr1(unittest.TestCase):
     def test_11(self):
         u'''事故经过为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -331,8 +331,8 @@ class test_zr1(unittest.TestCase):
     def test_12(self):
         u'''估损金额为空'''
         data = """{
-        "serialNumber":"110112113114",
-        "houseNo":"YZ-101",
+        "serialNumber":"1110112113116",
+        "houseNo":"YZ-102",
         "provinceCode":"150000",
         "cityCode":"150100",
         "districtCode":"150105",
@@ -358,8 +358,8 @@ class test_zr1(unittest.TestCase):
     def test_13(self):
         u'''估损金额小数点后四位'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -386,8 +386,8 @@ class test_zr1(unittest.TestCase):
     def test_14(self):
         u'''估损金额非Double类型'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -414,8 +414,8 @@ class test_zr1(unittest.TestCase):
     def test_15(self):
         u'''报案人为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -441,8 +441,8 @@ class test_zr1(unittest.TestCase):
     def test_16(self):
         u'''报案时间为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -468,8 +468,8 @@ class test_zr1(unittest.TestCase):
     def test_17(self):
         u'''报案时间格式错误'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -496,8 +496,8 @@ class test_zr1(unittest.TestCase):
     def test_18(self):
         u'''报案时间晚于当前时间'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -524,8 +524,8 @@ class test_zr1(unittest.TestCase):
     def test_19(self):
         u'''联系人为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -551,8 +551,8 @@ class test_zr1(unittest.TestCase):
     def test_20(self):
         u'''联系人电话为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -578,8 +578,8 @@ class test_zr1(unittest.TestCase):
     # def test_21(self):#未校验
     #     u'''联系人电话格式错误'''
     #     data = """{
-    #         "serialNumber":"110112113114",
-    #         "houseNo":"YZ-101",
+    #         "serialNumber":"1110112113116",
+    #         "houseNo":"YZ-102",
     #         "provinceCode":"150000",
     #         "cityCode":"150100",
     #         "districtCode":"150105",
@@ -612,8 +612,8 @@ class test_zr1(unittest.TestCase):
     # def test_22(self):
     #     u'''联系人邮箱格式错误'''
     #     data = """{
-    #         "serialNumber":"110112113114",
-    #         "houseNo":"YZ-101",
+    #         "serialNumber":"1110112113116",
+    #         "houseNo":"YZ-102",
     #         "provinceCode":"150000",
     #         "cityCode":"150100",
     #         "districtCode":"150105",
@@ -646,8 +646,8 @@ class test_zr1(unittest.TestCase):
     def test_23(self):
         u'''是否含人伤为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -673,8 +673,8 @@ class test_zr1(unittest.TestCase):
     def test_24(self):
         u'''是否含人伤非0或1'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -702,8 +702,8 @@ class test_zr1(unittest.TestCase):
     def test_25(self):
         u'''重大事故为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -729,8 +729,8 @@ class test_zr1(unittest.TestCase):
     def test_26(self):#重大事故非N或Y 返回成功
         u'''重大事故非N或Y'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -758,8 +758,8 @@ class test_zr1(unittest.TestCase):
     def test_27(self):
         u'''自然灾害为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -786,8 +786,8 @@ class test_zr1(unittest.TestCase):
     def test_28(self):
         u'''自然灾害非Y或N'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -815,8 +815,8 @@ class test_zr1(unittest.TestCase):
     def test_29(self):
         u'''来源标识为空'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -842,8 +842,8 @@ class test_zr1(unittest.TestCase):
     def test_30(self):
         u'''来源标识内容错误'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -870,8 +870,8 @@ class test_zr1(unittest.TestCase):
     def test_31(self):
         u'''入参正确'''
         data = """{
-            "serialNumber":"110112113114",
-            "houseNo":"YZ-101",
+            "serialNumber":"1110112113116",
+            "houseNo":"YZ-102",
             "provinceCode":"150000",
             "cityCode":"150100",
             "districtCode":"150105",
@@ -904,8 +904,8 @@ class test_zr1(unittest.TestCase):
     def test_32(self):
         u'''流水号已存在'''
         data = """{
-        "serialNumber":"110112113114",
-        "houseNo":"YZ-101",
+        "serialNumber":"1110112113116",
+        "houseNo":"YZ-102",
         "provinceCode":"150000",
         "cityCode":"150100",
         "districtCode":"150105",
@@ -933,7 +933,7 @@ class test_zr1(unittest.TestCase):
         u'''同一个出险日期房源号已存在'''
         data = """{
         "serialNumber":"110112113116",
-        "houseNo":"YZ-101",
+        "houseNo":"YZ-102",
         "provinceCode":"150000",
         "cityCode":"150100",
         "districtCode":"150105",

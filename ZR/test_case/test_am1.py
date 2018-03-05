@@ -8,7 +8,7 @@ class test_am1(unittest.TestCase):
     u'''结案接口'''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/caseDeal/vCore1/caseClosed"
+        cls.base_url = "http://"+url+"/caseDeal/vCore1/caseClosed"
         sql(config_file_path, case_form, database_name) #案件信息表插入数据
         sql(config_file_path, CONFIRM, database_name)  # 确认信息表插入数据
         sql(config_file_path, MASTER, database_name)  # 结案主表插入数据
@@ -16,10 +16,10 @@ class test_am1(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/caseDeal/vCore1/caseClosed"
         sql(config_file_path, case_form2, database_name)  # 案件信息表插入数据
         sql(config_file_path, CONFIRM1, database_name)  # 确认信息表插入数据
         sql(config_file_path, MASTER1, database_name)  # 结案主表插入数据
+        sql(config_file_path, AUXILIARY1, database_name)  # 自如案件辅助表插入数据
         sql(config_file_path, AUXILIARY1, database_name)  # 自如案件辅助表插入数据
 
     def test1(self):
@@ -36,7 +36,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号8号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-02-24 13:51:30",
@@ -67,7 +67,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-02-24 13:51:30",
@@ -97,7 +97,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -128,7 +128,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -158,7 +158,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -189,7 +189,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -219,7 +219,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -250,7 +250,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -281,7 +281,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -328,7 +328,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -359,7 +359,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -389,7 +389,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -420,7 +420,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -450,7 +450,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -481,7 +481,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -511,7 +511,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -542,7 +542,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -573,7 +573,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -603,7 +603,7 @@ class test_am1(unittest.TestCase):
                 "insPeriod":"2017-03-16 00:00:00到2017-03-20 23:59:59",
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -634,7 +634,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.059,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -665,7 +665,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":"贰佰元整",
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -695,7 +695,7 @@ class test_am1(unittest.TestCase):
                 "insPeriod":"2017-03-16 00:00:00到2017-03-20 23:59:59",
                 "actualAmount":120.05,
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -726,7 +726,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017/03/18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -756,7 +756,7 @@ class test_am1(unittest.TestCase):
                 "insPeriod":"2017-03-16 00:00:00到2017-03-20 23:59:59",
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -787,7 +787,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"5",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -879,7 +879,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
                 "auditPerson":"菲菲"
@@ -909,7 +909,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号5号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -940,7 +940,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "auditTime":"2017-03-18 13:53:41",
                 "auditPerson":"菲菲"
@@ -970,7 +970,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"654***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -1001,7 +1001,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditPerson":"菲菲"
@@ -1031,7 +1031,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-20 13:53:41",
@@ -1062,7 +1062,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -1092,7 +1092,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -1107,7 +1107,6 @@ class test_am1(unittest.TestCase):
         result = r.json()
         self.assertEqual(result['code'], u"40103")
         self.assertEqual(result['message'], u"报案号62222519理赔计算书的核赔人不一致;")
-
 
     def test_37(self):
         u'''来源标识为空'''
@@ -1124,7 +1123,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -1154,7 +1153,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -1185,7 +1184,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-18 13:53:41",
@@ -1222,7 +1221,7 @@ class test_am1(unittest.TestCase):
                 "actualAmount":120.05,
                 "accidentPeriod":"2017-03-18 13:53:41",
                 "payNature":"4",
-                "HouseNo":"YZ-101",
+                "HouseNo":"YZ-102",
                 "HouseAddress":"天府大道199号4号楼",
                 "calculationProcess":"***<赔付标的：>***",
                 "auditTime":"2017-03-19 13:51:30",
@@ -1239,7 +1238,6 @@ class test_am1(unittest.TestCase):
         self.assertEqual(result['message'], u"访问成功")
         self.assertEqual(result['data']["resultCode"], u"11111")
         self.assertEqual(result['data']["resultMsg"], u"重复结案")
-
 
 if __name__ == '__main__':
     unittest.main()

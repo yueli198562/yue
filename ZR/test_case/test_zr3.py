@@ -8,7 +8,7 @@ class test_zr3(unittest.TestCase):
     u'''理赔确认接口 '''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.88:8083/jtCase/vCore1/claimConfirmSync"
+        cls.base_url = "http://"+url+"/jtCase/vCore1/claimConfirmSync"
         sql(config_file_path, case_form, database_name)
         sql(config_file_path, l, database_name)
 
@@ -34,7 +34,7 @@ class test_zr3(unittest.TestCase):
 
     def test2(self):
         u'''江泰报案流水号为空'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "confirmFlag": 0,
             "confirmDesc": "房屋的损失也应该加上",
             "channelSource": "jts0oe7silrxv3upx5"}'''
@@ -47,7 +47,7 @@ class test_zr3(unittest.TestCase):
 
     def test3(self):
         u'''江泰报案流水号不存在'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "622225df19",
             "confirmFlag": 0,
             "confirmDesc": "房屋的损失也应该加上",
@@ -61,7 +61,7 @@ class test_zr3(unittest.TestCase):
 
     def test4(self):
         u'''是否同意为空'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "62222519",
             "confirmDesc": "房屋的损失也应该加上",
             "channelSource": "jts0oe7silrxv3upx5"}'''
@@ -74,7 +74,7 @@ class test_zr3(unittest.TestCase):
 
     def test5(self):
         u'''是否同意非0或1'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "62222519",
             "confirmFlag": 9,
             "confirmDesc": "房屋的损失也应该加上",
@@ -88,7 +88,7 @@ class test_zr3(unittest.TestCase):
 
     def test6(self):
         u'''是否同意为0时，确认描述为空'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "62222519",
             "confirmFlag": 0,
             "channelSource": "jts0oe7silrxv3upx5"}'''
@@ -101,7 +101,7 @@ class test_zr3(unittest.TestCase):
 
     def test7(self):
         u'''来源标识为空'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "62222519",
             "confirmFlag": 0,
             "confirmDesc": "房屋的损失也应该加上",}'''
@@ -114,7 +114,7 @@ class test_zr3(unittest.TestCase):
 
     def test8(self):
         u'''来源标识错误'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "62222519",
             "confirmFlag": 0,
             "confirmDesc": "房屋的损失也应该加上",}'''
@@ -127,7 +127,7 @@ class test_zr3(unittest.TestCase):
 
     def test9(self):
         u'''入参正确'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo": "62222519",
             "confirmFlag": 0,
             "confirmDesc": "房屋的损失也应该加上",
@@ -144,7 +144,7 @@ class test_zr3(unittest.TestCase):
 
     def test_10(self):
         u'''重复确认'''
-        data = '''{"serialNumber": "110112113114",
+        data = '''{"serialNumber": "1110112113116",
             "reportNo":
             "62222519",
             "confirmFlag": 0,
