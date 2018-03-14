@@ -1,21 +1,22 @@
 #coding:utf-8
 import requests,unittest
-from db_fixture.mysql_db import *
+
 from db_fixture.test_data import *
+from db_fixture.mysql_db import *
 
 class Interface_test8(unittest.TestCase):
     u''' 修改险种 '''
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.101:9090/insurance/riskInfo"
-        sql(config_file_path, classes1, database_name)
-        sql(config_file_path, risk1, database_name)
+        cls.base_url = "http://"+ip+"/insurance/riskInfo"
+        get_mysql_data(classes1)
+        get_mysql_data(risk1)
 
     @classmethod
     def tearDownClass(cls):
-        sql(config_file_path, classes2, database_name)
-        sql(config_file_path, risk2, database_name)
+        get_mysql_data(classes2)
+        get_mysql_data(risk2)
 
     def test1(self):
         u''' 修改险种内容 '''
@@ -24,8 +25,15 @@ class Interface_test8(unittest.TestCase):
         f={"updateFiles":open(updateFiles,'r')}
         r = requests.put(self.base_url,data=data,files=f)
         result = r.json()
+        a = get_mysql_data('select * from t_risk_info where risk_id="XZ12345"')
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        self.assertIn("XL12345", a)
+        self.assertIn(u"XZ修改险种名称", a)
+        self.assertIn(u"XZ修改描述", a)
+        self.assertIn('A', a)
+        self.assertIn('A', a)
+        self.assertIn('S', a)
 
     def test2(self):
         u''' 险种编码riskId不存在 '''

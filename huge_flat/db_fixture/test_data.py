@@ -1,14 +1,11 @@
 # coding:utf-8
 from db_fixture.mysql_db import *
-
-database_name="jtproducts"  #数据库名
+import os,time
 
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)) )# 返回当前文件所在目录的上级目录
-config_file_path= base_dir + "\\db_config.ini"
 updateFiles=base_dir + "\\updateFiles\\c.txt"
 updateFilesb=base_dir + "\\updateFiles\\b.txt"
-nowtime=time.strftime("%y-%m-%d %H:%M:%S")
-nowtime="20"+nowtime
+nowtime=time.strftime("%Y-%m-%d %H:%M:%S") #返回当前时间
 
 #险类插入和删除数据
 classes1='INSERT into t_insurance_classes VALUES("XL12345","XL险类名称","XL描述","N",1,'+ '"'+nowtime+'"'+','+ '"'+nowtime+'"'+','+'"XL创建人",0)'
@@ -34,9 +31,4 @@ insurance_clause1='INSERT into t_insurance_clause(insurance_clause_name,insuranc
 VALUES("c.txt","clause_url",2,"ZR12345",1,'+'"' + nowtime + '")'
 insurance_clause2='delete from t_insurance_clause where their_id="ZR12345"'
 
-liability = 'delete from t_insurance_liability where insurance_liability_id="ZR123456"'
-liability_limit = 'delete from t_liability_limit where insurance_liability_id="ZR123456"'
-limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
-insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
-for i in [liability, liability_limit, limit_values, insurance_clause]:
-    sql(config_file_path, i, database_name)
+

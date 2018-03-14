@@ -1,23 +1,24 @@
 #coding:utf-8
 import requests,unittest
-from db_fixture.mysql_db import *
+
 from db_fixture.test_data import *
+from db_fixture.mysql_db import *
 
 class Interface_test11(unittest.TestCase):
     u''' 增加责任 '''
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.117:9090/liability/insuranceLiability"
-        sql(config_file_path,risk1,database_name)
+        cls.base_url = "http://"+ip+"/liability/insuranceLiability"
+        get_mysql_data(risk1)
         for i in [liability1,liability_limit1,limit_values1,insurance_clause1]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     @classmethod
     def tearDownClass(cls):
         for i in [liability2, liability_limit2, limit_values2, insurance_clause2]:
-            sql(config_file_path, i, database_name)
-        sql(config_file_path, risk2, database_name)
+            get_mysql_data(i)
+        get_mysql_data(risk2)
 
     def test1(self):
         u''' 责任编码已存在 '''
@@ -113,15 +114,24 @@ class Interface_test11(unittest.TestCase):
         f = {"multipartFile": open(updateFiles, 'r')}
         r = requests.post(self.base_url, data=data, files=f)
         result = r.json()
+        for i in result:
+            print i,result[i]
+        a = get_mysql_data('select * from t_insurance_liability where insurance_liability_id="ZR123456"')
+        #查看返回值是否存在
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        #查看数据库是否插入数据
+        self.assertIn(u"ZR123456", a)
+        self.assertIn(u"ZR责任名称6", a)
+        self.assertIn(u"ZR责任描述6", a)
+        self.assertIn(u'XZ险种名称', a)
         #-----删除测试数据-------
         liability = 'delete from t_insurance_liability where insurance_liability_id="ZR123456"'
         liability_limit = 'delete from t_liability_limit where insurance_liability_id="ZR123456"'
         limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
         insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
         for i in [liability, liability_limit, limit_values, insurance_clause]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     def test7(self):
         u''' 添加多个限额名称，1个限额名称对应1个限额值 '''
@@ -148,7 +158,7 @@ class Interface_test11(unittest.TestCase):
         limit_values_1= 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称2"'
         insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
         for i in [liability, liability_limit, limit_values,limit_values_1, insurance_clause]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     def test8(self):
         u''' 添加多个限额名称，1个限额名称对应多个限额值 '''
@@ -177,7 +187,7 @@ class Interface_test11(unittest.TestCase):
         limit_values_1 = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称2"'
         insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
         for i in [liability, liability_limit, limit_values, limit_values_1, insurance_clause]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     def test9(self):
         u''' 责任编码为空 '''
@@ -327,7 +337,7 @@ class Interface_test11(unittest.TestCase):
         r = requests.post(self.base_url, data=data, files=f)
         result = r.json()
         self.assertEqual(result['code'], 8)
-        self.assertEqual(result['msg'], u"上传文件为空！")
+        self.assertEqual(result['msg'], u"上传文件为空")
 
     def test_19(self):
         u''' 上传文件不合法 '''
@@ -341,7 +351,7 @@ class Interface_test11(unittest.TestCase):
         r = requests.post(self.base_url, data=data, files=f)
         result = r.json()
         self.assertEqual(result['code'], 9)
-        self.assertEqual(result['msg'], u"文件上传失败！：文件名称格式不合法！")
+        self.assertEqual(result['msg'], u"文件上传失败：文件名称格式不合法！")
 
     def test_20(self):
         u''' 添加多个文件 '''
@@ -365,7 +375,7 @@ class Interface_test11(unittest.TestCase):
         limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
         insurance_clause = 'delete from t_insurance_clause where their_id="ZR123456"'
         for i in [liability, liability_limit, limit_values, insurance_clause]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
 if __name__ == '__main__':
     unittest.main()

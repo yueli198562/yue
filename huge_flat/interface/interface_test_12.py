@@ -8,16 +8,16 @@ class Interface_test12(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.117:9090/liability/insuranceLiability"
-        sql(config_file_path,risk1,database_name)
+        cls.base_url = "http://"+ip+"/liability/insuranceLiability"
+        get_mysql_data(risk1)
         for i in [liability1,liability_limit1,limit_values1,insurance_clause1]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     @classmethod
     def tearDownClass(cls):
         for i in [liability2, liability_limit2, limit_values2, insurance_clause2]:
-            sql(config_file_path, i, database_name)
-        sql(config_file_path, risk2, database_name)
+            get_mysql_data(i)
+        get_mysql_data(risk2)
 
     def test1(self):
         u''' 修改责任 '''
@@ -32,7 +32,7 @@ class Interface_test12(unittest.TestCase):
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
         limit_values = 'delete from t_liability_limit_values where liability_limit_name="y修改限额名称1"'
-        sql(config_file_path, limit_values, database_name)
+        get_mysql_data(limit_values)
 
     def test2(self):
         u''' 责任编码不存在 '''
@@ -74,7 +74,7 @@ class Interface_test12(unittest.TestCase):
         self.assertEqual(result['msg'], u"成功")
         #-----删除测试数据-------
         limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
-        sql(config_file_path, limit_values, database_name)
+        get_mysql_data(limit_values)
 
     def test5(self):
         u''' 修改多个限额名称，1个限额名称对应1个限额值 '''
@@ -95,8 +95,8 @@ class Interface_test12(unittest.TestCase):
         #-----删除测试数据-------
         limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
         limit_values_1= 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称2"'
-        for i in [liability_limit, limit_values,limit_values_1]:
-            sql(config_file_path, i, database_name)
+        for i in [limit_values,limit_values_1]:
+            get_mysql_data(i)
 
     def test6(self):
         u''' 修改多个限额名称，1个限额名称对应多个限额值 '''
@@ -122,7 +122,7 @@ class Interface_test12(unittest.TestCase):
         limit_values = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称1"'
         limit_values_1 = 'delete from t_liability_limit_values where liability_limit_name="y新增限额名称2"'
         for i in [ limit_values, limit_values_1]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     def test7(self):
         u''' 责任编码为空 '''
@@ -271,7 +271,7 @@ class Interface_test12(unittest.TestCase):
         r = requests.put(self.base_url, data=data, files=f)
         result = r.json()
         self.assertEqual(result['code'], 8)
-        self.assertEqual(result['msg'], u"上传文件为空！")
+        self.assertEqual(result['msg'], u"上传文件为空")
 
     def test_18(self):
         u''' 上传文件不合法 '''
@@ -285,7 +285,7 @@ class Interface_test12(unittest.TestCase):
         r = requests.put(self.base_url, data=data, files=f)
         result = r.json()
         self.assertEqual(result['code'], 9)
-        self.assertEqual(result['msg'], u"文件上传失败！：文件名称格式不合法！")
+        self.assertEqual(result['msg'], u"文件上传失败：文件名称格式不合法！")
 
 if __name__ == '__main__':
     unittest.main()

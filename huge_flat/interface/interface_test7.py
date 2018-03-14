@@ -1,21 +1,22 @@
 #coding:utf-8
 import requests,unittest
-from db_fixture.mysql_db import *
+
 from db_fixture.test_data import *
+from db_fixture.mysql_db import *
 
 class Interface_test7(unittest.TestCase):
     u''' 增加险种 '''
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.101:9090/insurance/riskInfo"
-        sql(config_file_path, classes1, database_name)
-        sql(config_file_path, risk1, database_name)
+        cls.base_url = "http://"+ip+"/insurance/riskInfo"
+        get_mysql_data(classes1)
+        get_mysql_data(risk1)
 
     @classmethod
     def tearDownClass(cls):
-        sql(config_file_path, classes2, database_name)
-        sql(config_file_path, risk2, database_name)
+        get_mysql_data(classes2)
+        get_mysql_data(risk2)
 
     def test1(self):
         u''' 险种编码riskId已存在 '''
@@ -40,7 +41,7 @@ class Interface_test7(unittest.TestCase):
         risk = 'delete from t_risk_info where risk_id="XZ123456";'
         insurance_clause = 'delete from t_insurance_clause where their_id="XZ123456"'
         for i in [risk,insurance_clause]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
     def test3(self):
         u''' 险种编码riskId为空 '''
@@ -203,17 +204,18 @@ class Interface_test7(unittest.TestCase):
                 "insuranceClassesId": "XL12345", "riskFlag": "M", "riskGroupFlag": "G", "riskShortFlag": "L"}
         f = [
             ("updateFiles", open(updateFilesb, "rb")),
-            ("updateFiles", open(updateFiles, "rb")),
-        ]
+            ("updateFiles", open(updateFiles, "rb")),]
         r = requests.post(self.base_url, data=data, files=f)
         result = r.json()
+        a = get_mysql_data('select * from t_risk_info where risk_id="XZ123456"')
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        self.assertIn("XZ123456",a)
         # 删除插入数据
         risk = 'delete from t_risk_info where risk_id="XZ123456";'
         insurance_clause = 'delete from t_insurance_clause where their_id="XZ123456"'
         for i in [risk, insurance_clause]:
-            sql(config_file_path, i, database_name)
+            get_mysql_data(i)
 
 if __name__ == '__main__':
     unittest.main()

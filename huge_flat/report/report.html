@@ -189,11 +189,11 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>大平台接口测试报告</h1>
-<p class='attribute'><strong>Start Time:</strong> 2018-02-05 14:09:37</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:20.700000</p>
+<p class='attribute'><strong>Start Time:</strong> 2018-03-14 15:54:46</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:07.207000</p>
 <p class='attribute'><strong>Status:</strong> Pass 142</p>
 
-<p class='description'>大平台接口测试报告</p>
+<p class='description'>大平台接口测试报告(险类、险种、责任)</p>
 </div>
 
 
@@ -669,47 +669,47 @@ function showOutput(id, name) {
 </tr>
 
 <tr id='pt8.2' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test10: 主附加险标识riskFlag为空</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr id='pt8.3' class='hiddenRow'>
     <td class='none'><div class='testcase'>test2: 险种编码riskId不存在</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.4' class='hiddenRow'>
+<tr id='pt8.3' class='hiddenRow'>
     <td class='none'><div class='testcase'>test3: 险种编码riskId为空</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.5' class='hiddenRow'>
+<tr id='pt8.4' class='hiddenRow'>
     <td class='none'><div class='testcase'>test4: 险种编码riskId大于20个字符</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.6' class='hiddenRow'>
+<tr id='pt8.5' class='hiddenRow'>
     <td class='none'><div class='testcase'>test5: 险种名称riskName为空</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.7' class='hiddenRow'>
+<tr id='pt8.6' class='hiddenRow'>
     <td class='none'><div class='testcase'>test6: 险种名称大于20个字符</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.8' class='hiddenRow'>
+<tr id='pt8.7' class='hiddenRow'>
     <td class='none'><div class='testcase'>test7: 险种描述大于200个字符</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.9' class='hiddenRow'>
+<tr id='pt8.8' class='hiddenRow'>
     <td class='none'><div class='testcase'>test8: 所属险类insuranceClassesId为空</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt8.10' class='hiddenRow'>
+<tr id='pt8.9' class='hiddenRow'>
     <td class='none'><div class='testcase'>test9: 所属险类insuranceClassesId不存在</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt8.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_10: 主附加险标识riskFlag为空</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
@@ -872,7 +872,28 @@ function showOutput(id, name) {
 
 <tr id='pt11.6' class='hiddenRow'>
     <td class='none'><div class='testcase'>test6: 添加一个限额名称对应一个限额值</div></td>
-    <td colspan='5' align='center'>pass</td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt11.6')" >
+        pass</a>
+
+    <div id='div_pt11.6' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_pt11.6').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+pt11.6: msg 成功
+code 200
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
 </tr>
 
 <tr id='pt11.7' class='hiddenRow'>
@@ -960,57 +981,57 @@ function showOutput(id, name) {
 </tr>
 
 <tr id='pt12.2' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test10: 责任类型非0或1</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr id='pt12.3' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test11: 险种名称为空</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr id='pt12.4' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test12: 限额名称为空</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr id='pt12.5' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test13: 限额名称大于50个字符</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr id='pt12.6' class='hiddenRow'>
     <td class='none'><div class='testcase'>test2: 责任编码不存在</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt12.7' class='hiddenRow'>
+<tr id='pt12.3' class='hiddenRow'>
     <td class='none'><div class='testcase'>test3: 险种名称不存在</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt12.8' class='hiddenRow'>
+<tr id='pt12.4' class='hiddenRow'>
     <td class='none'><div class='testcase'>test4: 修改一个限额名称对应一个限额值</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt12.9' class='hiddenRow'>
+<tr id='pt12.5' class='hiddenRow'>
     <td class='none'><div class='testcase'>test5: 修改多个限额名称，1个限额名称对应1个限额值</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt12.10' class='hiddenRow'>
+<tr id='pt12.6' class='hiddenRow'>
     <td class='none'><div class='testcase'>test6: 修改多个限额名称，1个限额名称对应多个限额值</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt12.11' class='hiddenRow'>
+<tr id='pt12.7' class='hiddenRow'>
     <td class='none'><div class='testcase'>test7: 责任编码为空</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 
-<tr id='pt12.12' class='hiddenRow'>
+<tr id='pt12.8' class='hiddenRow'>
     <td class='none'><div class='testcase'>test9: 责任类型为空</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt12.9' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_10: 责任类型非0或1</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt12.10' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_11: 险种名称为空</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt12.11' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_12: 限额名称为空</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr id='pt12.12' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_13: 限额名称大于50个字符</div></td>
     <td colspan='5' align='center'>pass</td>
 </tr>
 

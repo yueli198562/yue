@@ -1,21 +1,22 @@
 #coding:utf-8
-import requests,unittest
-from db_fixture.mysql_db import *
-from db_fixture.test_data import *
+import requests
+import unittest
 
+from db_fixture.test_data import *
+from db_fixture.mysql_db import *
 
 class Interface_test4(unittest.TestCase):
     u''' 修改险类 '''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.101:9090/insurance/insuranceClasses"
-        sql(config_file_path, classes1, database_name)
-        sql(config_file_path, classes_1, database_name)
+        cls.base_url = "http://"+ip+"/insurance/insuranceClasses"
+        get_mysql_data(classes1)
+        get_mysql_data(classes_1)
 
     @classmethod
     def tearDownClass(cls):
-        sql(config_file_path, classes2, database_name)
-        sql(config_file_path, classes_2, database_name)
+        get_mysql_data(classes2)
+        get_mysql_data(classes_2)
 
     def test1(self):
         u''' 所有参数为空 '''
@@ -40,7 +41,7 @@ class Interface_test4(unittest.TestCase):
                 "insuranceClassesDes": "XL描述", "isParent": 'Y'}
         r = requests.put(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400101)
+        self.assertEqual(result['code'], 40101)
         self.assertEqual(result['msg'], u"险类编码不能超过20个字符")
 
     def test4(self):
@@ -59,7 +60,7 @@ class Interface_test4(unittest.TestCase):
                 "insuranceClassesDes": "XL描述", "isParent": 'Y'}
         r = requests.put(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400104)
+        self.assertEqual(result['code'], 40104)
         self.assertEqual(result['msg'], u"险类名称不能超过20个字符")
 
     def test6(self):
@@ -74,7 +75,7 @@ class Interface_test4(unittest.TestCase):
                 "isParent": 'Y'}
         r = requests.put(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400103)
+        self.assertEqual(result['code'], 40103)
         self.assertEqual(result['msg'], u"险类描述不能超过200个字符")
 
     def test7(self):
@@ -91,8 +92,13 @@ class Interface_test4(unittest.TestCase):
                 "isParent": 'Y'}
         r = requests.put(self.base_url, data)
         result = r.json()
+        a = get_mysql_data('select * from t_insurance_classes where insurance_classes_id="XL12345"')
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        self.assertIn("XL12345",a)
+        self.assertIn(u"XL修改险类名称",a)
+        self.assertIn(u"XL修改描述", a)
+        self.assertIn('N', a)
 
     def test9(self):
         u''' 是否为根节点isParent为N,parentId不存在  '''
@@ -111,8 +117,14 @@ class Interface_test4(unittest.TestCase):
                 "isParent": 'N', "parentId": "XL123456"}
         r = requests.put(self.base_url, data)
         result = r.json()
+        a = get_mysql_data('select * from t_insurance_classes where insurance_classes_id="XL12345"')
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        self.assertIn("XL12345", a)
+        self.assertIn(u"XL修改险类名称", a)
+        self.assertIn(u"XL修改描述", a)
+        self.assertIn('N', a)
+        self.assertIn('XL123456', a)
 
     def test_11(self):
         u''' 是否有节点isParent非Y或N'''
@@ -120,7 +132,7 @@ class Interface_test4(unittest.TestCase):
                 "isParent": 'M', "parentId": 18}
         r = requests.put(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400105)
+        self.assertEqual(result['code'], 40105)
         self.assertEqual(result['msg'], u"是否为父类选型参数不合法")
 
     def test_12(self):
@@ -130,7 +142,7 @@ class Interface_test4(unittest.TestCase):
                 "isParent": 'Y'}
         r = requests.put(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 300101)
+        self.assertEqual(result['code'], 30101)
         self.assertEqual(result['msg'], u"含有子级险类的险类不能进行修改")
 
     def test_13(self):
@@ -145,13 +157,19 @@ class Interface_test4(unittest.TestCase):
 
     def test_14(self):
         u''' 险类编码insuranceClassesId存在  '''
-        data = {"insuranceClassesId": "XL12345", "insuranceClassesName": "yl修改增加险类名称",
-            "insuranceClassesDes": "yl增加险类描述",
+        data = {"insuranceClassesId": "XL12345", "insuranceClassesName": "XL修改险类名称",
+            "insuranceClassesDes": "XL修改描述",
             "isParent": 'Y',"parentId": 0}
         r = requests.put(self.base_url, data)
         result = r.json()
+        a = get_mysql_data('select * from t_insurance_classes where insurance_classes_id="XL12345"')
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        self.assertIn("XL12345", a)
+        self.assertIn(u"XL修改险类名称", a)
+        self.assertIn(u"XL修改描述", a)
+        self.assertIn('N', a)
+        self.assertIn('0', a)
 
 if __name__ == '__main__':
     unittest.main()

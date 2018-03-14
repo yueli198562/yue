@@ -7,11 +7,11 @@ class Interface_test1(unittest.TestCase):
     u''' 险类展示列表 '''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.101:9090/insurance/insuranceClasses"
-        sql(config_file_path, classes1, database_name)
+        cls.base_url = "http://"+ip+"/insurance/insuranceClasses"
+        get_mysql_data(classes1)
     @classmethod
     def tearDownClass(cls):
-        sql(config_file_path, classes2, database_name)
+        get_mysql_data(classes2)
 
     def test1(self):
         u''' 所有参数为空 '''

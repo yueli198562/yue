@@ -1,19 +1,20 @@
 #coding:utf-8
 import requests,unittest
-from db_fixture.mysql_db import *
+
 from db_fixture.test_data import *
+from db_fixture.mysql_db import *
 
 class Interface_test3(unittest.TestCase):
     u''' 增加险类 '''
 
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.101:9090/insurance/insuranceClasses"
-        sql(config_file_path, classes1, database_name)
+        cls.base_url = "http://"+ip+"/insurance/insuranceClasses"
+        get_mysql_data(classes1)
 
     @classmethod
     def tearDownClass(cls):
-        sql(config_file_path, classes2, database_name)
+        get_mysql_data(classes2)
 
     def test1(self):
         u''' 险类编码已存在 '''
@@ -30,11 +31,16 @@ class Interface_test3(unittest.TestCase):
                 "insuranceClassesDes":"XL描述","isParent":'Y'}
         r = requests.post(self.base_url, data)
         result = r.json()
+        a = get_mysql_data('select * from t_insurance_classes where insurance_classes_id="XL123456"')
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        self.assertIn("XL123456", a)
+        self.assertIn(u"XL险类名称1", a)
+        self.assertIn(u"XL描述", a)
+        self.assertIn('N', a)
         #数据库删除插入数据
         classes = 'delete from t_insurance_classes where insurance_classes_id="XL123456"'
-        sql(config_file_path, classes, database_name)
+        get_mysql_data(classes)
 
     def test3(self):
         u''' 险类编码超过20个字符'''
@@ -43,7 +49,7 @@ class Interface_test3(unittest.TestCase):
                 "insuranceClassesDes": "XL描述", "isParent": 'Y'}
         r = requests.post(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400101)
+        self.assertEqual(result['code'], 40101)
         self.assertEqual(result['msg'], u"险类编码不能超过20个字符")
 
     def test4(self):
@@ -62,7 +68,7 @@ class Interface_test3(unittest.TestCase):
                 "insuranceClassesDes": "XL描述", "isParent": 'Y'}
         r = requests.post(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400104)
+        self.assertEqual(result['code'], 40104)
         self.assertEqual(result['msg'], u"险类名称不能超过20个字符")
 
     def test6(self):
@@ -77,7 +83,7 @@ class Interface_test3(unittest.TestCase):
                 "isParent": 'Y'}
         r = requests.post(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400103)
+        self.assertEqual(result['code'], 40103)
         self.assertEqual(result['msg'], u"险类描述不能超过200个字符")
 
     def test7(self):
@@ -98,9 +104,11 @@ class Interface_test3(unittest.TestCase):
         result = r.json()
         self.assertEqual(result['code'], 200)
         self.assertEqual(result['msg'], u"成功")
+        a = get_mysql_data('select * from t_insurance_classes where insurance_classes_id="XL123456"')
+        self.assertTrue(a)
         #------删除插入数据------
         classes = 'delete from t_insurance_classes where insurance_classes_id="XL123456"'
-        sql(config_file_path, classes, database_name)
+        get_mysql_data(classes)
 
     def test9(self):
         u''' isParent为N，parentId不存在 '''
@@ -127,7 +135,7 @@ class Interface_test3(unittest.TestCase):
                 "isParent": 'M',"parentId": 18}
         r = requests.post(self.base_url, data)
         result = r.json()
-        self.assertEqual(result['code'], 400105)
+        self.assertEqual(result['code'], 40105)
         self.assertEqual(result['msg'], u"是否为父类选型参数不合法")
 
     def test_12(self):

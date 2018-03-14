@@ -1,20 +1,21 @@
 #coding:utf-8
 import requests,unittest
-from db_fixture.mysql_db import *
+
 from db_fixture.test_data import *
+from db_fixture.mysql_db import *
 
 class Interface_test6(unittest.TestCase):
     u''' 险种详情查询 '''
     @classmethod
     def setUpClass(cls):
-        cls.base_url = "http://10.10.62.101:9090/insurance/riskInfo/"
-        sql(config_file_path, classes1, database_name)
-        sql(config_file_path, risk1, database_name)
+        cls.base_url = "http://"+ip+"/insurance/riskInfo/"
+        get_mysql_data(classes1)
+        get_mysql_data(risk1)
 
     @classmethod
     def tearDownClass(cls):
-        sql(config_file_path, classes2, database_name)
-        sql(config_file_path, risk2, database_name)
+        get_mysql_data(classes2)
+        get_mysql_data(risk2)
 
     def test1(self):
         u''' 险种id存在 '''
